@@ -15,7 +15,7 @@ namespace Catalog.API.Products.GetProductById
             var product = await session.LoadAsync<Product>(request.id,cancellationToken);
             if (product == null)
             {
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(request.id);
             }
 
             return new GetProductByIdResult(product);
