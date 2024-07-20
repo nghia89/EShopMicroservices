@@ -1,10 +1,12 @@
 
 using Catalog.API.Data;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
-
+var connectionString = builder.Configuration.GetConnectionString("Database");
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
 {
@@ -16,17 +18,22 @@ builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddMarten(config =>
 {
-    config.Connection(builder.Configuration.GetConnectionString("Database")!);
+    config.Connection(connectionString!);
 }).UseLightweightSessions();
 
 if (builder.Environment.IsDevelopment())
     builder.Services.InitializeMartenWith<CatalogInitialData>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-
+builder.Services.AddHealthChecks().AddNpgSql(connectionString!);
 var app = builder.Build();
  
 app.MapCarter();
 app.UseExceptionHandler(options => { });
 
+app.UseHealthChecks("/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 app.Run();
