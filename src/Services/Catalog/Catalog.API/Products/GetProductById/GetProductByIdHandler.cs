@@ -11,7 +11,6 @@ namespace Catalog.API.Products.GetProductById
     {
         public async Task<GetProductByIdResult> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            logger.LogInformation("GetProductByIdQueryHanler");
             var product = await session.LoadAsync<Product>(request.id,cancellationToken);
             if (product == null)
             {
