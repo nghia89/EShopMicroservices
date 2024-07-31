@@ -8,6 +8,10 @@ namespace Basket.API.Exceptions
         {
 
         }
+        public BasketNotFoundException(string id) : base("Basket", id)
+        {
+
+        }
     }
   
 }

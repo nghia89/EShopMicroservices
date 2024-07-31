@@ -17,7 +17,7 @@ namespace Basket.API.Data
             return basket ?? throw new BasketNotFoundException(userName);
         }
 
-        public async Task<ShoppingCart> Storebasket(ShoppingCart cart, CancellationToken cancellationToken)
+        public async Task<ShoppingCart> StoreBasket(ShoppingCart cart, CancellationToken cancellationToken)
         {
             session.Store(cart);
             await session.SaveChangesAsync(cancellationToken);

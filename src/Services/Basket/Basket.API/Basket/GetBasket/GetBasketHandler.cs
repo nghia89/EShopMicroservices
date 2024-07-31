@@ -1,5 +1,4 @@
-﻿using Basket.API.Models;
-using Buildingblocks.CQRS;
+﻿
 
 namespace Basket.API.Basket.GetBasket
 {
@@ -11,7 +10,7 @@ namespace Basket.API.Basket.GetBasket
     {
         public async Task<GetBasketResult> Handle(GetBasketQuery request, CancellationToken cancellationToken)
     {
-        var basket = await repository.GetBasket(request.userName)
+            var basket = await repository.GetBasket(request.userName,cancellationToken);
         return new GetBasketResult(basket);
     }
 }
