@@ -1,0 +1,77 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "catalog api dev",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_calatalog_api",
+            "program": "${workspaceFolder}/src/Services/Catalog/Catalog.API/bin/Debug/net8.0/Catalog.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Services/Catalog/Catalog.API",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "requireExactSource": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:5050"
+            },
+            "launchBrowser": {
+                "enabled": true,
+                "args": "https://localhost:5050/api/swagger/",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "tasks api dev",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_basket_api",
+            "program": "${workspaceFolder}/src/Services/Basket/Basket.API/bin/Debug/net8.0/Basket.API.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Services/Basket/Basket.API",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "requireExactSource": false,
+            "launchBrowser": {
+                "enabled": true,
+                "args": "https://localhost:5051/api/swagger/",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:5051"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Multi Api",
+            "configurations": ["catalog api dev", "tasks api dev"]
+        }
+    ]
+}
