@@ -16,10 +16,12 @@ builder.Services.AddMarten(config =>
     config.Connection(connectionString!);
     config.Schema.For<ShoppingCart>().Identity(x => x.UserName);
 }).UseLightweightSessions();
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 var app = builder.Build();
 
 app.MapCarter();
+app.UseExceptionHandler(options => { });
 
 app.Run();
