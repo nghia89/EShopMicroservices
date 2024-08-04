@@ -6,7 +6,7 @@ namespace Basket.API.Data
     {
         public async Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken)
     {
-        await basketRepository.DeleteBasket(userName);
+        await basketRepository.DeleteBasket(userName,cancellationToken);
         await cache.RemoveAsync(userName, cancellationToken);
         return true;
     }
@@ -15,7 +15,7 @@ namespace Basket.API.Data
     {
         var cacheBasket = await cache.GetStringAsync(userName, cancellationToken);
         if (!string.IsNullOrEmpty(cacheBasket))
-            return JsonSerializer.Deserialize<ShoppingCart>(cacheBasket);
+            return JsonSerializer.Deserialize<ShoppingCart>(cacheBasket)!;
 
         var basket = await basketRepository.GetBasket(userName, cancellationToken);
         await cache.SetStringAsync(userName, JsonSerializer.Serialize(basket), cancellationToken);

@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
 var connectionString = builder.Configuration.GetConnectionString("Database");
+var connectionStringRedis = builder.Configuration.GetConnectionString("Redis");
 builder.Services.AddCarter();
 builder.Services.AddMediatR(config =>
 {
@@ -19,6 +20,11 @@ builder.Services.AddMarten(config =>
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.Decorate<ICachedBasketRepository, CachedBasketRepository>();
+builder.Services.AddStackExchangeRedisCache(option =>
+{
+    option.Configuration = connectionStringRedis;
+});
 var app = builder.Build();
 
 app.MapCarter();

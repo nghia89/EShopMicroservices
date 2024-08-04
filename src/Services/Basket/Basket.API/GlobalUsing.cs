@@ -9,3 +9,5 @@ global using Basket.API.Exceptions;
 global using Marten;
 global using Basket.API.Data;
 global using Buildingblocks.CQRS;
+global using Microsoft.Extensions.Caching.Distributed;
+global using System.Text.Json;
