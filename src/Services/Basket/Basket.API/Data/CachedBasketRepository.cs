@@ -2,7 +2,7 @@
 namespace Basket.API.Data
 {
     public class CachedBasketRepository(IBasketRepository basketRepository, IDistributedCache cache)
-        : ICachedBasketRepository
+        : IBasketRepository
     {
         public async Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken)
     {
