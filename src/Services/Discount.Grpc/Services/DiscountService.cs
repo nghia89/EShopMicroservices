@@ -25,7 +25,7 @@ namespace Discount.Grpc.Services
             var coupon = await dbContext.Coupons.FirstOrDefaultAsync(x => x.ProductName == request.ProductName);
 
             if (coupon is null)
-                coupon = new Models.Coupon { ProductName = "No Discount", Amount = 0 };
+                coupon = new Coupon { ProductName = "No Discount", Amount = 0, Description = "No Discount" };
             logger.LogInformation("Discount is retrieved for producName");
 
             var couponModel = coupon.Adapt<CouponModel>();
