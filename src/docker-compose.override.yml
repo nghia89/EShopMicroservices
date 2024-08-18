@@ -30,11 +30,11 @@ services:
         environment:
             SA_PASSWORD: "Passw0rd!"
             ACCEPT_EULA: "Y"
-        volumes:
-            - sqlserver_data:/var/lib/sqlserver/data
         restart: always
         ports:
           - "1433:1433"
+        volumes:
+            - sqlserver_data:/var/lib/sqlserver/data
 
     distributedcache:
         container_name: distributedcache
