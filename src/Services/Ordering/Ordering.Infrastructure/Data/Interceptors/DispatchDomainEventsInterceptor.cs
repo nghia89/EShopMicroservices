@@ -1,12 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Ordering.Domain.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+ 
 namespace Ordering.Infrastructure.Data.Interceptors
 {
     public class DispatchDomainEventsInterceptor(IMediator mediator)
